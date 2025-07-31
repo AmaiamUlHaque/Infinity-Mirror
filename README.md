@@ -19,7 +19,8 @@ A self-built, interactive infinity mirror featuring an individually addressable 
     5. [Arduino Programs](#arduino-programs)
     6. [Progress Pictures](#progress-pictures)
 6. [Evaluation](#evaluation)
-7. [Bibliography](#bibliography)
+7. [Skills Learned & Applied](#skills-learned--applied)
+8. [Bibliography](#bibliography)
 
 
 ## Summary 
@@ -500,935 +501,967 @@ ties, or anything that can hold its shape.</td>
 
 ### Arduino Programs
 
-Sketch 1: Original Code Found Online for LEDs
+#### Sketch 1: Original Code Found Online for LEDs
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>//link:
-https://www.makerguides.com/how-to-control-ws2812b-individually-addressable-leds-using-arduino/</p>
-<p>#include &lt;FastLED.h&gt;</p>
-<p>#define RGB_PIN 6 // LED DATA PIN</p>
-<p>#define RGB_LED_NUM 10 // 10 LEDs [0...9]</p>
-<p>#define BRIGHTNESS 200 // brightness range [0..255]</p>
-<p>#define CHIP_SET WS2812B // types of RGB LEDs</p>
-<p>#define COLOR_CODE GRB //sequence of colours in data stream</p>
-<p>// Define the array of LEDs</p>
-<p>CRGB LEDs[RGB_LED_NUM];</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600); //initialise monitor and baud rate</p>
-<p>Serial.println("WS2812B LEDs strip Initialize"); //program start</p>
-<p>FastLED.addLeds&lt;CHIP_SET, RGB_PIN, COLOR_CODE&gt;(LEDs,
-RGB_LED_NUM); //adds LEDs into a group to make it easier to use
-functions (e.g. setBrightness, clear, show, etc)</p>
-<p>FastLED.setBrightness(BRIGHTNESS); //sets the brightness of the LED
-strip to the value of BRIGHTNESS</p>
-<p>FastLED.setMaxPowerInVoltsAndMilliamps(5, 500); //sets the maximum
-power to ensure safe usage</p>
-<p>FastLED.clear(); //clears all local data in the LEDs, basically just
-wipes it clean from any previous data</p>
-<p>FastLED.show(); //used to update the Arduino about the status of the
-CRGB function</p>
-<p>//CRGB function responsible for the colours displayed to represent
-the red, green, and blue values which can range from a byte or 0 to
-255</p>
-<p>//it does not show anything here though since all local data was just
-removed</p>
-<p>//this gives LEDs a fresh start</p>
-<p>}</p>
-<p>void loop() {</p>
-<p>Toggle_RED_LED(); //calls on the method 'Toggle_RED_LED'</p>
-<p>}</p>
-<p>void Toggle_RED_LED(void) {</p>
-<p>//for loop goes through each of the LEDs to make it turn red and then
-back to black with 1 second delay in between</p>
-<p>for (int i = 0; i &lt; RGB_LED_NUM; i++)</p>
-<p>LEDs[i] = CRGB(255, 0, 0 ); //this is the rgb values needed to
-represent red</p>
-<p>FastLED.show();</p>
-<p>delay(1000);</p>
-<p>for (int i = 0; i &lt; RGB_LED_NUM; i++)</p>
-<p>LEDs[i] = CRGB(0, 0, 0 );</p>
-<p>FastLED.show();</p>
-<p>delay(1000);</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+<details>
+  <summary>Click to see code!</summary>
+  
+    //link: https://www.makerguides.com/how-to-control-ws2812b-individually-addressable-leds-using-arduino/
+    #include <FastLED.h>
 
-Sketch 2: Original Code Found Online for IR Receiver and Remote
+    #define RGB_PIN          6            // LED DATA PIN
+    #define RGB_LED_NUM      10           // 10 LEDs [0...9]
+    #define BRIGHTNESS       200          // brightness range [0..255]
+    #define CHIP_SET         WS2812B      // types of RGB LEDs
+    #define COLOR_CODE       GRB          //sequence of colours in data stream
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>#include &lt;IRremote.h&gt; //includes the library needed for the
-IR remote</p>
-<p>const int RECV_PIN = 2; //declares the incoming DATA pin</p>
-<p>IRrecv irrecv (RECV_PIN); //creates and names the receiver object</p>
-<p>decode_results results; //stores incoming code from 'irrecv'</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600); //initialises serial monitor and baud rate to
-9600</p>
-<p>Serial.println("program start.");</p>
-<p>irrecv.enableIRIn(); //begins the receiver to receive incoming
-signals</p>
-<p>}</p>
-<p>void loop() {</p>
-<p>//ensure to press each button, and record the hexadecimal (the code
-that is 6 letters and numbers long)</p>
-<p>//they will be needed later to code a certain task to each
-corresponding button</p>
-<p>if (irrecv.decode(&amp;results)) { //stores a code if a signal is
-received</p>
-<p>Serial.println(results.value, HEX); //prints out the code received in
-hexadecimal</p>
-<p>irrecv.resume(); //allows the receiver to continue to receive
-incoming signals</p>
-<p>}</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+    // Define the array of LEDs
+    CRGB LEDs[RGB_LED_NUM];
 
-Sketch 3: Testing Out All LEDs
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>#include &lt;FastLED.h&gt; //includes the FastLED library</p>
-<p>#define RGB_PIN 6 //declares LED strip DATA pin</p>
-<p>#define RGB_LED_NUM 60 //declares how many LEDs are in the strip</p>
-<p>#define BRIGHTNESS 255 //declares a brightness, which ranges from 0
-to 255, equivalent to a byte</p>
-<p>#define CHIP_SET WS2812B //declares what type of RGB LEDs the strip
-is</p>
-<p>#define COLOR_CODE GRB //declares the order of the red, green, and
-blue values</p>
-<p>//in this case it is green, then red, then blue</p>
-<p>// define the array of LEDs</p>
-<p>CRGB LEDs[RGB_LED_NUM];</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600); //initialises serial monitor and baud rate to
-9600</p>
-<p>Serial.println("program start.");</p>
-<p>FastLED.addLeds&lt;CHIP_SET, RGB_PIN, COLOR_CODE&gt;(LEDs,
-RGB_LED_NUM);</p>
-<p>//adds LEDs to make in easier to use functions such as setBrightness,
-clear, show, etc</p>
-<p>FastLED.setBrightness(BRIGHTNESS); //sets brightness according to the
-variable 'BRIGHTNESS'</p>
-<p>FastLED.setMaxPowerInVoltsAndMilliamps(5, 500); //sets maximum power
-for safe usage</p>
-<p>FastLED.clear(); //clears any local LED data</p>
-<p>FastLED.show(); //updates local RGB LED data</p>
-<p>}</p>
-<p>void loop() {</p>
-<p>//each function makes the enitre LED strip to display a single
-colour</p>
-<p>//red, green, and blue are the primary colours of light</p>
-<p>//with them you can make all the colours you want, specifially upto
-16'777'216 colours</p>
-<p>//mix all three, and you get white</p>
-<p>//white is tested to ensure the LED strip can handle max power</p>
-<p>//purple is displayed only because it is my favourite colour</p>
-<p>AllRed();</p>
-<p>AllGreen();</p>
-<p>AllBlue();</p>
-<p>AllWhite();</p>
-<p>AllPurple();</p>
-<p>}</p>
-<p>//each method uses a for loop to set each LED in the array to the
-written hexcode</p>
-<p>//then clears the local data stored on it</p>
-<p>//returning all the LEDs to black</p>
-<p>void AllRed() {</p>
-<p>SetAllLEDs(255, 0, 0 );</p>
-<p>delay(3500);</p>
-<p>FastLED.clear();</p>
-<p>delay(1500);</p>
-<p>}</p>
-<p>void AllGreen() {</p>
-<p>SetAllLEDs(0, 255, 0 );</p>
-<p>delay(3500);</p>
-<p>FastLED.clear();</p>
-<p>delay(1500);</p>
-<p>}</p>
-<p>void AllBlue() {</p>
-<p>SetAllLEDs(0, 0, 255 );</p>
-<p>delay(3500);</p>
-<p>FastLED.clear();</p>
-<p>delay(1500);</p>
-<p>}</p>
-<p>void AllWhite() {</p>
-<p>SetAllLEDs(255, 255, 255 );</p>
-<p>delay(3500);</p>
-<p>FastLED.clear();</p>
-<p>delay(1500);</p>
-<p>}</p>
-<p>void AllPurple() {</p>
-<p>SetAllLEDs(255, 0, 255 );</p>
-<p>delay(3500);</p>
-<p>FastLED.clear();</p>
-<p>delay(1500);</p>
-<p>}</p>
-<p>void SetAllLEDs (byte r, byte g, byte b) {</p>
-<p>//sets all LEDS to a single colour using a for loop to go through
-each LED</p>
-<p>//only needs the parameters of each rgb value</p>
-<p>for (int i = 0; i &lt; LED_NUM; i++)</p>
-<p>LEDs[i] = CRGB(r, g, b);</p>
-<p>FastLED.show();</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+    void setup() {
+        Serial.begin(9600); //initialise monitor and baud rate 
+        Serial.println("WS2812B LEDs strip Initialize"); //program start
+        FastLED.addLeds<CHIP_SET, RGB_PIN, COLOR_CODE>(LEDs, RGB_LED_NUM); //adds LEDs into a group to make it easier to use functions (e.g. setBrightness, clear, show, etc)
+        FastLED.setBrightness(BRIGHTNESS); //sets the brightness of the LED strip to the value of BRIGHTNESS
+        FastLED.setMaxPowerInVoltsAndMilliamps(5, 500); //sets the maximum power to ensure safe usage
+        FastLED.clear(); //clears all local data in the LEDs, basically just wipes it clean from any previous data
+        FastLED.show();  //used to update the Arduino about the status of the CRGB function
+                        //CRGB function responsible for the colours displayed to represent the red, green, and blue values which can range from a byte or 0 to 255
+                        //it does not show anything here though since all local data was just removed
+                        //this gives LEDs a fresh start
+    }
 
-Sketch 4 : IR Remote Switch Cases
+    void loop() {
+        Toggle_RED_LED(); //calls on the method 'Toggle_RED_LED'
+    }
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>#include &lt;IRremote.h&gt; //includes the library needed for the
-IR remote</p>
-<p>const int RECV_PIN = 2; //declares the incoming DATA pin</p>
-<p>IRrecv irrecv (RECV_PIN); //creates and names the receiver object</p>
-<p>decode_results results; //stores incoming code from 'irrecv'</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600); //initialises serial monitor and baud rate to
-9600</p>
-<p>Serial.println("program start.");</p>
-<p>irrecv.enableIRIn(); //begins the receiver to receive incoming
-signals</p>
-<p>}</p>
-<p>void loop() {</p>
-<p>//ensure to press each button, and record the hexadecimal (the code
-that is 6 letters and numbers long)</p>
-<p>//they will be needed later to code a certain task to each
-corresponding button</p>
-<p>if (irrecv.decode(&amp;results)) { //stores a code if a signal is
-received</p>
-<p>Serial.println(results.value, HEX); //prints out the code received in
-hexadecimal</p>
-<p>irrecv.resume(); //allows the receiver to contune to receive incoming
-signals</p>
-<p>switch (results.value) {</p>
-<p>//depending the results of the incoming signals, a certain task is
-done</p>
-<p>//in this case it prints what button was pressed to the serial
-monitor</p>
-<p>case 0xFFA25D:</p>
-<p>Serial.println("CH- button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF629D:</p>
-<p>Serial.println("CH button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFE21D:</p>
-<p>Serial.println("CH+ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF22DD:</p>
-<p>Serial.println("PREV button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF02FD:</p>
-<p>Serial.println("NEXT button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFC23D:</p>
-<p>Serial.println("PAUSE button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFE01F:</p>
-<p>Serial.println("VOL- button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFA857:</p>
-<p>Serial.println("VOL+ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF906F:</p>
-<p>Serial.println("EQ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF6897:</p>
-<p>Serial.println("0 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF9867:</p>
-<p>Serial.println("+100 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFB04F:</p>
-<p>Serial.println("+200 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF30CF:</p>
-<p>Serial.println("1 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF18E7:</p>
-<p>Serial.println("2 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF7A85:</p>
-<p>Serial.println("3 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF10EF:</p>
-<p>Serial.println("4 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF38C7:</p>
-<p>Serial.println("5 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF5AA5:</p>
-<p>Serial.println("6 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF42BD:</p>
-<p>Serial.println("7 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF4AB5:</p>
-<p>Serial.println("8 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF52AD:</p>
-<p>Serial.println("9 button has been pressed");</p>
-<p>break;</p>
-<p>}</p>
-<p>}</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
 
-Sketch 5: IR Remote Interrupt
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>#include &lt;IRremote.h&gt; //includes the library needed for the
-IR remote</p>
-<p>const int RECV_PIN = 2; //declares the incoming DATA pin</p>
-<p>IRrecv irrecv (RECV_PIN); //creates and names the receiver object</p>
-<p>decode_results results; //stores incoming code from 'irrecv'</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600); //initialises serial monitor and baud rate to
-9600</p>
-<p>Serial.println("program start.");</p>
-<p>irrecv.enableIRIn(); //begins the receiver to receive incoming
-signals</p>
-<p>pinMode(RECV_PIN, INPUT_PULLUP); //declares the pin as an
-interrupt</p>
-<p>attachInterrupt(digitalPinToInterrupt(RECV_PIN), eee, CHANGE);</p>
-<p>//declares the pin number, the method name, and activation state in
-order for interrupt to run</p>
-<p>//there are three possible activation states</p>
-<p>//RISING activates when there is a rise in voltage</p>
-<p>//FALLING activates when there is a drop in voltage\</p>
-<p>//CHANGE activates when they is either a rise or drop in voltage</p>
-<p>}</p>
-<p>void loop() {</p>
-<p>Serial.println("on standby...");</p>
-<p>delay(2500);</p>
-<p>}</p>
-<p>void IRTranslate() {</p>
-<p>//this ensures that the interrupt is working if certain button
-outputs are printed to the serial monitor</p>
-<p>//depending on what button is pressed, a certain task is carried
-out</p>
-<p>if (irrecv.decode(&amp;results)) { //stores a code if a signal is
-received</p>
-<p>Serial.println(results.value, HEX); //prints out the code received in
-hexadecimal</p>
-<p>irrecv.resume(); //allows the receiver to contune to receive incoming
-signals</p>
-<p>switch (results.value) {</p>
-<p>//depending the results of the incoming signals, a certain task is
-done</p>
-<p>//in this case it prints what button was pressed to the serial
-monitor</p>
-<p>case 0xFFA25D:</p>
-<p>Serial.println("CH- button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF629D:</p>
-<p>Serial.println("CH button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFE21D:</p>
-<p>Serial.println("CH+ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF22DD:</p>
-<p>Serial.println("PREV button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF02FD:</p>
-<p>Serial.println("NEXT button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFC23D:</p>
-<p>Serial.println("PAUSE button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFE01F:</p>
-<p>Serial.println("VOL- button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFA857:</p>
-<p>Serial.println("VOL+ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF906F:</p>
-<p>Serial.println("EQ button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF6897:</p>
-<p>Serial.println("0 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF9867:</p>
-<p>Serial.println("+100 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFFB04F:</p>
-<p>Serial.println("+200 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF30CF:</p>
-<p>Serial.println("1 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF18E7:</p>
-<p>Serial.println("2 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF7A85:</p>
-<p>Serial.println("3 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF10EF:</p>
-<p>Serial.println("4 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF38C7:</p>
-<p>Serial.println("5 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF5AA5:</p>
-<p>Serial.println("6 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF42BD:</p>
-<p>Serial.println("7 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF4AB5:</p>
-<p>Serial.println("8 button has been pressed");</p>
-<p>break;</p>
-<p>case 0xFF52AD:</p>
-<p>Serial.println("9 button has been pressed");</p>
-<p>break;</p>
-<p>}</p>
-<p>}</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+    void Toggle_RED_LED(void) {
+        //for loop goes through each of the LEDs to make it turn red and then back to black with 1 second delay in between
+        for (int i = 0; i < RGB_LED_NUM; i++)
+            LEDs[i] = CRGB(255, 0, 0 ); //this is the rgb values needed to represent red
+        FastLED.show();
+        delay(1000);
+        for (int i = 0; i < RGB_LED_NUM; i++)
+            LEDs[i] = CRGB(0, 0, 0 );
+        FastLED.show();
+        delay(1000);
+    }
 
-Sketch 6: Final Version -
+</details>
 
-*\*Note - this is much neater in the .INO file.*
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr>
-<td><p>/*</p>
-<p>Amaiam ul Haque</p>
-<p>Last Updated: Jan 26, 2023</p>
-<p>Description:********************************************************************************************</p>
-<p>Let's-a-go! *insert super mario bros theme*</p>
-<p>*/</p>
-<p>/* Note:</p>
-<p>* Since this file has multiple tabs,</p>
-<p>* each of them run in a specific order.</p>
-<p>* It will always start off with the tab that the folder is named
-after,</p>
-<p>* and then the rest is determined by their alphabetical order.</p>
-<p>* Which is why each tab starts with a,b,c, so on and so forth,</p>
-<p>* and if there is a second letter following the first one,</p>
-<p>* this is meant to serve as some sort of a subsection.</p>
-<p>*</p>
-<p>* For example,</p>
-<p>* the transitions tabs start with the letter 'f',</p>
-<p>* while each different type of transition have their own
-tab/subsection (fa, fb, fc...)</p>
-<p>*</p>
-<p>* But in this case the only tabs that have to be in order are the
-declarations, setup, and loop.</p>
-<p>* Since all the other tabs are methods and will not run until called
-upon.</p>
-<p>*/</p>
-<p>#include &lt;FastLED.h&gt; //the library for RGB LEDs</p>
-<p>#define LED_PIN 5 //LED data pin</p>
-<p>#define CHIP_SET WS2812B //type of RGB LED Strip</p>
-<p>#define COLOUR_CODE GRB //the sequence of colours</p>
-<p>#define LED_NUM 54 //# of LEDs in strip</p>
-<p>CRGB LEDs[LED_NUM]; //array to hold all LEDs</p>
-<p>#include &lt;IRremote.h&gt; //library for the IR receiver</p>
-<p>const int RECV_PIN = 2; //incoming &amp; outgoing signal pin</p>
-<p>IRrecv irrecv (RECV_PIN); //create and name receiver object</p>
-<p>decode_results results; //stores incoming code/results</p>
-<p>int duration = 1; //the delay between each colour/transition</p>
-<p>byte brightness = 255; //the desired brightness level of the LEDs (0
-= off, 1 = dimmest 255 = brightest)</p>
-<p>boolean currentState = HIGH; //tracks the current state of power
-(whether the LEDs are on or off)</p>
-<p>boolean paused = false; //tracks whether or not the LEDs are
-stopped/paused at a chosen colour</p>
-<p>int transition = 0; //tracks the current transition to switch between
-each of them</p>
-<p>byte crease = 15; //the (in/de)crease / step for each colour in
-between the fade transition</p>
-<p>int currentLED = 0; //keeps track of current LED in the array for the
-spiral transition</p>
-<p>int previousLEDs; //keeps tracks of previous LEDs to update their
-brightness</p>
-<p>//currently this is not working how i want it to</p>
-<p>int previousResult; //keeps track of the most recent input received
-from the IR remote</p>
-<p>void setup() {</p>
-<p>Serial.begin(9600);</p>
-<p>Serial.println("Let the show begin!!!"); //program has started</p>
-<p>//configuration of the RGB LED strip using the FastLED library</p>
-<p>FastLED.addLeds&lt;CHIP_SET, LED_PIN, COLOUR_CODE&gt;(LEDs, LED_NUM);
-//adds LEDs so it is easier to use functions such as setBrightness,
-clear, and show</p>
-<p>FastLED.setMaxPowerInVoltsAndMilliamps(5, 3000); //sets max power to
-ensure safe usage</p>
-<p>FastLED.setBrightness(brightness); //sets the brightness of LEDs</p>
-<p>FastLED.clear(); //clears and previous local data</p>
-<p>FastLED.show(); //updates the local data and displays it</p>
-<p>//configuration of the IR remote using the IRremote library</p>
-<p>irrecv.enableIRIn(); //IR Receiver begins receiving process</p>
-<p>pinMode(RECV_PIN, INPUT_PULLUP); //declares pin as input meant for an
-interrupt</p>
-<p>attachInterrupt(digitalPinToInterrupt(RECV_PIN), IRTranslate,
-RISING); //declares the pin, method, &amp; activation state to setup the
-interrupt</p>
-<p>}</p>
-<p>//void loop() { //this is what is supposed to run if the IRTranslate
-method worked.</p>
-<p>// Default();</p>
-<p>//}</p>
-<p>void loop() {</p>
-<p>//since the IRTranslate method is not working, code will have to go
-through them each maually</p>
-<p>//everything below is just for easy copy paste</p>
-<p>//sets brightness and duration to what a value that the IR remote
-could have done and goes through each transition</p>
-<p>brightness = 75;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 10;</p>
-<p>Default();</p>
-<p>brightness = 175;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 5;</p>
-<p>Default();</p>
-<p>brightness = 255;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 1;</p>
-<p>Default();</p>
-<p>Fade(crease);//this one only has duraution of one since it takes
-really long</p>
-<p>brightness = 75;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 10;</p>
-<p>for (int i = 0; i &lt; 5; i++)</p>
-<p>Spiral();</p>
-<p>brightness = 175;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 5;</p>
-<p>for (int i = 0; i &lt; 7; i++)</p>
-<p>Spiral();</p>
-<p>brightness = 255;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 1;</p>
-<p>for (int i = 0; i &lt; 10; i++)</p>
-<p>Spiral();</p>
-<p>brightness = 75;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 10;</p>
-<p>for (int i = 0; i &lt; 5; i++)</p>
-<p>Reload();</p>
-<p>brightness = 175;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 5;</p>
-<p>for (int i = 0; i &lt; 7; i++)</p>
-<p>Reload();</p>
-<p>brightness = 255;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 1;</p>
-<p>for (int i = 0; i &lt; 10; i++)</p>
-<p>Reload();</p>
-<p>brightness = 75;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 10;</p>
-<p>for (int i = 0; i &lt; 100; i++)</p>
-<p>Random();</p>
-<p>brightness = 175;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 5;</p>
-<p>for (int i = 0; i &lt; 250; i++)</p>
-<p>Random();</p>
-<p>brightness = 255;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 1;</p>
-<p>for (int i = 0; i &lt; 555; i++)</p>
-<p>Random();</p>
-<p>brightness = 175;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 5;</p>
-<p>Purples();</p>
-<p>brightness = 255;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>duration = 1;</p>
-<p>Purples();</p>
-<p>}</p>
-<p>//eee</p>
-<p>void IRTranslate() {</p>
-<p>if (irrecv.decode(&amp;results)) {</p>
-<p>delay(100);</p>
-<p>irrecv.resume();</p>
-<p>//stores the most recent input to avoid repeats</p>
-<p>//0xFFFFFFFF is the code received when a repeat is consecutive button
-pressed</p>
-<p>if (results.value == 0xFFFFFFFF)</p>
-<p>results.value = previousResult;</p>
-<p>else</p>
-<p>previousResult = results.value;</p>
-<p>Serial.println("Current result = " + (results.value, HEX));</p>
-<p>Serial.println("Previous result = " + previousResult);</p>
-<p>switch (results.value) {</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFFA25D: //turns on and off the LEDS</p>
-<p>Serial.println("CH- button has been pressed");</p>
-<p>Serial.println("CH- = power");</p>
-<p>if (currentState == HIGH) { //to turn off</p>
-<p>currentState == LOW;</p>
-<p>FastLED.setBrightness(0);</p>
-<p>while (currentState == LOW)</p>
-<p>delay(50);</p>
-<p>}</p>
-<p>else { //to turn on</p>
-<p>currentState == HIGH;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>}</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF22DD: //decreases the speed of transitions</p>
-<p>Serial.println("PREV button has been pressed");</p>
-<p>Serial.println("PREV = -speed");</p>
-<p>if (duration &gt;= 50)</p>
-<p>duration -= 50;</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF02FD: //increases the speed of transitions</p>
-<p>Serial.println("NEXT button has been pressed");</p>
-<p>Serial.println("NEXT = +speed");</p>
-<p>if (duration &lt;= 2500)</p>
-<p>duration += 50;</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFFC23D: //pauses the code and allows the current colour to
-only be displayed</p>
-<p>Serial.println("PAUSE button has been pressed");</p>
-<p>Serial.println("PAUSE/PLAY");</p>
-<p>if (paused == false) { //to pause</p>
-<p>paused = true;</p>
-<p>while (paused == true)</p>
-<p>delay (250);</p>
-<p>}</p>
-<p>else //to play/continue</p>
-<p>paused = false;</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFFE01F: //decreases the brightness of LEDs</p>
-<p>Serial.println("VOL- button has been pressed");</p>
-<p>Serial.println("VOL- = -brightness");</p>
-<p>if (brightness &gt;= 15) {</p>
-<p>brightness -= 15;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>}</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFFA857: //increases the brightness of LEDs</p>
-<p>Serial.println("VOL+ button has been pressed");</p>
-<p>Serial.println("VOL+ = +brightness");</p>
-<p>if (brightness &lt;= 240) {</p>
-<p>brightness += 15;</p>
-<p>FastLED.setBrightness(brightness);</p>
-<p>}</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF906F: //swaps between all the dfferent transitions</p>
-<p>Serial.println("EQ button has been pressed");</p>
-<p>Serial.println("EQ = transition");</p>
-<p>if (transition == 5)</p>
-<p>transition = 0;</p>
-<p>else</p>
-<p>transition += 1;</p>
-<p>switch (transition) {</p>
-<p>case 0:</p>
-<p>while (transition == 0)</p>
-<p>Default();</p>
-<p>break;</p>
-<p>case 1:</p>
-<p>while (transition == 1)</p>
-<p>Fade(crease);</p>
-<p>break;</p>
-<p>case 2:</p>
-<p>while (transition == 2)</p>
-<p>Spiral();</p>
-<p>break;</p>
-<p>case 3:</p>
-<p>while (transition == 3)</p>
-<p>Reload();</p>
-<p>break;</p>
-<p>case 4:</p>
-<p>while (transition == 4)</p>
-<p>Random();</p>
-<p>break;</p>
-<p>case 5:</p>
-<p>while (transition == 5)</p>
-<p>Purples();</p>
-<p>break;</p>
-<p>}</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF38C7: //displays only purple</p>
-<p>Serial.println("5 button has been pressed");</p>
-<p>Serial.println("5 = purple");</p>
-<p>SetAllLEDs(255, 0, 255);</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF42BD: //display icy white</p>
-<p>Serial.println("7 button has been pressed");</p>
-<p>Serial.println("7 = icy white");</p>
-<p>SetAllLEDs(212, 235, 255);</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF4AB5: //display only white</p>
-<p>Serial.println("8 button has been pressed");</p>
-<p>Serial.println("8 = white");</p>
-<p>SetAllLEDs(255, 255, 255);</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>case 0xFF52AD: //display warm white</p>
-<p>Serial.println("9 button has been pressed");</p>
-<p>Serial.println("9 = warm white");</p>
-<p>SetAllLEDs(255, 244, 229);</p>
-<p>break;</p>
-<p>//---------------------------------------------------------------------------------------</p>
-<p>// default:</p>
-<p>// //Serial.println("One of the following buttons have been
-pressed.\n\tCH \n\tCH+ \n\t0 \n\t+100 \n\t+200 \n\t1 \n\t2 \n\t3 \n\t4
-\n\t6");</p>
-<p>// //CH=FF629D, CH+=FFE21D, 0=FF6897, +100=FF9867, +200=FFB04F,
-1=FF30CF, 2=FF18E7, 3=FF7A85, 4=FF10EF, 6=FF5AA5</p>
-<p>// Serial.println("One of the following buttons have been pressed;
-CH, CH+, 0, +100, +200, 1, 2, 3, 4, 6");</p>
-<p>// break;</p>
-<p>}</p>
-<p>}</p>
-<p>}</p>
-<p>void SetAllLEDs (byte r, byte g, byte b) { //sets all LEDS to a
-single colour using a for loop to go through all of them</p>
-<p>for (int i = 0; i &lt; LED_NUM; i++)</p>
-<p>LEDs[i] = CRGB(r, g, b);</p>
-<p>FastLED.show();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>void FadeBrightness(byte r, byte g, byte b) {//steadily increases and
-then decreases brightness of all LEDs based on the current colour</p>
-<p>for (byte i = 0; i &lt; brightness; i++) {</p>
-<p>FastLED.setBrightness(i);</p>
-<p>SetAllLEDs(r, g, b);</p>
-<p>FastLED.show();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = brightness; i &gt; 0; i--) {</p>
-<p>FastLED.setBrightness(i);</p>
-<p>SetAllLEDs(r, g, b);</p>
-<p>FastLED.show();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>}</p>
-<p>void UpdateCurrentLED() {</p>
-<p>//keeps track of which LED currently display / updated with a new
-colour</p>
-<p>//and then resets it back to index zero when it gets to the highest
-index</p>
-<p>if (currentLED &lt; (LED_NUM - 1))</p>
-<p>currentLED++;</p>
-<p>else</p>
-<p>currentLED = 0;</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>void FadePreviousLED(byte r, byte g, byte b) {//a way to keep track
-of past LEDs with new colours</p>
-<p>for (byte i = 1; i &lt;= 17; i++) {</p>
-<p>//since their is no setBrightness function for a single LED</p>
-<p>//reducing the amount of red/green/blue will make it appear to be
-dimmer</p>
-<p>r = r * i / 17;</p>
-<p>g = g * i / 17;</p>
-<p>b = b * i / 17;</p>
-<p>//keeps tracks of the previous LEDS for upto 17 behind of the
-currentLED</p>
-<p>if (i &gt; currentLED)</p>
-<p>previousLEDs = LED_NUM - i - currentLED;</p>
-<p>else</p>
-<p>previousLEDs = currentLED - i;</p>
-<p>}</p>
-<p>}</p>
-<p>void Default() { //goes through all 16777216 possible colours with a
-smooth transition without any significant change</p>
-<p>for (byte i = 0; i &lt; 255; i++) //red to yellow</p>
-<p>SetAllLEDs(255, i, 0);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //yellow to green</p>
-<p>SetAllLEDs(i, 255, 0);</p>
-<p>for (byte i = 0; i &lt; 255; i++) //green to cyan</p>
-<p>SetAllLEDs(0, 255, i);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //cyan to blue</p>
-<p>SetAllLEDs(0, i, 255);</p>
-<p>for (byte i = 0; i &lt; 255; i++) //blue to purple</p>
-<p>SetAllLEDs(i, 0, 255);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //purple to red</p>
-<p>SetAllLEDs(255, 0, i);</p>
-<p>}</p>
-<p>void Fade(byte crease) {//basically default transition but it slowly
-becomes brighter and until max desired brightness</p>
-<p>//and then slowly fades until completely dark</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) //red to yellow</p>
-<p>FadeBrightness(255, i, 0);</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) //yellow to green</p>
-<p>FadeBrightness(i, 255, 0);</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) //green to cyan</p>
-<p>FadeBrightness(0, 255, i);</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) //cyan to blue</p>
-<p>FadeBrightness(0, i, 255);</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) //blue to purple</p>
-<p>FadeBrightness(i, 0, 255);</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) //purple to red</p>
-<p>FadeBrightness(255, 0, i);</p>
-<p>}</p>
-<p>void Spiral() {</p>
-<p>//allows for a single LED to be a colour while going all around in a
-circle not stopping while also steadily changing colours</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //red to yellow</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(255, i, 0);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //yellow to green</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(i, 255, 0);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //green to cyan</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(0, 255, i);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //cyan to blue</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(0, i, 255);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //blue to purple</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(i, 0, 255);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //purple to red</p>
-<p>FastLED.clear();</p>
-<p>LEDs[currentLED] = CRGB(255, 0, i);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>}</p>
-<p>void Reload() {//like spiral transition but it affects all LEDs</p>
-<p>//as new LEDs are updated with new colours, old LEDs are replaced</p>
-<p>//all while steadily changing colours</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //red to yellow</p>
-<p>LEDs[currentLED] = CRGB(255, i, 0);</p>
-<p>FadePreviousLED(255, i, 0);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //yellow to green</p>
-<p>LEDs[currentLED] = CRGB(i, 255, 0);</p>
-<p>FadePreviousLED(i, 255, 0);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //green to cyan</p>
-<p>LEDs[currentLED] = CRGB(0, 255, i);</p>
-<p>FadePreviousLED(0, 255, i);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //cyan to blue</p>
-<p>LEDs[currentLED] = CRGB(0, i, 255);</p>
-<p>FadePreviousLED(0, i, 255);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 0; i &lt; 255; i += crease) { //blue to purple</p>
-<p>LEDs[currentLED] = CRGB(i, 0, 255);</p>
-<p>FadePreviousLED(i, 0, 255);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>for (byte i = 255; i &gt; 0; i -= crease) { //purple to red</p>
-<p>LEDs[currentLED] = CRGB(255, 0, i);</p>
-<p>FadePreviousLED(255, 0, i);</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>}</p>
-<p>void Random(){ //basically is just relaod but each LED that is
-updated with a new colour, is randomised</p>
-<p>LEDs[currentLED] = CRGB(random(255), random(255), random(255));</p>
-<p>FastLED.show();</p>
-<p>UpdateCurrentLED();</p>
-<p>delay(duration);</p>
-<p>}</p>
-<p>void Purples() {//basically just the default transition but it goes
-through all the possible purples</p>
-<p>for (byte i = 0; i &lt; 255; i++) // red to purple</p>
-<p>SetAllLEDs(255, 0, i);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //purple to blue</p>
-<p>SetAllLEDs(i, 0, 255);</p>
-<p>for (byte i = 0; i &lt; 255; i++) //blue to purple</p>
-<p>SetAllLEDs(i, 0, 255);</p>
-<p>for (byte i = 0; i &lt; 255; i++) //purple to white</p>
-<p>SetAllLEDs(255, i, 255);</p>
-<p>//reverse start</p>
-<p>for (byte i = 255; i &gt; 0; i--) //white to purple</p>
-<p>SetAllLEDs(255, i, 255);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //purple to blue</p>
-<p>SetAllLEDs(i, 0, 255);</p>
-<p>for (byte i = 0; i &lt; 255; i++) //blue to purple</p>
-<p>SetAllLEDs(i, 0, 255);</p>
-<p>for (byte i = 255; i &gt; 0; i--) //purple to red</p>
-<p>SetAllLEDs(255, 0, i);</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+#### Sketch 2: Original Code Found Online for IR Receiver and Remote
+
+<details>
+  <summary>Click to see code!</summary>
+  
+    #include <IRremote.h>     //includes the library needed for the IR remote
+    const int RECV_PIN = 2;   //declares the incoming DATA pin
+    IRrecv irrecv (RECV_PIN); //creates and names the receiver object
+    decode_results results;   //stores incoming code from 'irrecv'
+
+    void setup() {
+        Serial.begin(9600); //initialises serial monitor and baud rate to 9600
+        Serial.println("program start.");
+        irrecv.enableIRIn(); //begins the receiver to receive incoming signals
+    }
+
+    void loop() {
+        //ensure to press each button, and record the hexadecimal (the code that is 6 letters and numbers long)
+        //they will be needed later to code a certain task to each corresponding button
+        if (irrecv.decode(&results)) { //stores a code if a signal is received
+            Serial.println(results.value, HEX); //prints out the code received in hexadecimal
+            irrecv.resume(); //allows the receiver to continue to receive incoming signals
+        }
+    }
+
+</details>
+
+
+#### Sketch 3: Testing Out All LEDs
+
+<details>
+  <summary>Click to see code!</summary>
+    #include <FastLED.h>              //includes the FastLED library
+    #define RGB_PIN        6          //declares LED strip DATA pin
+    #define RGB_LED_NUM    60         //declares how many LEDs are in the strip
+    #define BRIGHTNESS     255        //declares a brightness, which ranges from 0 to 255, equivalent to a byte
+    #define CHIP_SET       WS2812B    //declares what type of RGB LEDs the strip is
+    #define COLOR_CODE     GRB        //declares the order of the red, green, and blue values
+    //in this case it is green, then red, then blue
+
+    // define the array of LEDs
+    CRGB LEDs[RGB_LED_NUM];
+
+
+    void setup() {
+        Serial.begin(9600); //initialises serial monitor and baud rate to 9600
+        Serial.println("program start.");
+
+        FastLED.addLeds<CHIP_SET, RGB_PIN, COLOR_CODE>(LEDs, RGB_LED_NUM);
+        //adds LEDs to make in easier to use functions such as setBrightness, clear, show, etc
+
+        FastLED.setBrightness(BRIGHTNESS); //sets brightness according to the variable 'BRIGHTNESS'
+        FastLED.setMaxPowerInVoltsAndMilliamps(5, 500); //sets maximum power for safe usage
+        FastLED.clear(); //clears any local LED data
+        FastLED.show(); //updates local RGB LED data
+    }
+
+    void loop() {
+        //each function makes the enitre LED strip to display a single colour
+        //red, green, and blue are the primary colours of light
+        //with them you can make all the colours you want, specifially upto 16'777'216 colours
+        //mix all three, and you get white
+        //white is tested to ensure the LED strip can handle max power
+        //purple is displayed only because it is my favourite colour
+        
+        AllRed();
+        AllGreen();  
+        AllBlue();   
+        AllWhite();  
+        AllPurple(); 
+    }
+
+
+    //each method uses a for loop to set each LED in the array to the written hexcode
+    //then clears the local data stored on it
+    //returning all the LEDs to black
+
+    void AllRed() {
+        SetAllLEDs(255, 0, 0 );
+        delay(3500);
+        FastLED.clear();
+        delay(1500);
+    }
+
+
+    void AllGreen() {
+        SetAllLEDs(0, 255, 0 );
+        delay(3500);
+        FastLED.clear();
+        delay(1500);
+    }
+
+
+    void AllBlue() {
+        SetAllLEDs(0, 0, 255 );
+        delay(3500);
+        FastLED.clear();
+        delay(1500);
+    }
+
+    void AllWhite() {
+        SetAllLEDs(255, 255, 255 );
+        delay(3500);
+        FastLED.clear();
+        delay(1500);
+    }
+
+    void AllPurple() {
+        SetAllLEDs(255, 0, 255 );
+        delay(3500);
+        FastLED.clear();
+        delay(1500);
+    }
+
+    void SetAllLEDs (byte r, byte g, byte b) {
+        //sets all LEDS to a single colour using a for loop to go through each LED
+        //only needs the parameters of each rgb value
+        for (int i = 0; i < LED_NUM; i++)
+            LEDs[i] = CRGB(r, g, b);
+        FastLED.show();
+    }
+
+</details>
+
+
+#### Sketch 4 : IR Remote Switch Cases
+
+<details>
+  <summary>Click to see code!</summary>
+  
+    #include <IRremote.h>     //includes the library needed for the IR remote
+    const int RECV_PIN = 2;   //declares the incoming DATA pin
+    IRrecv irrecv (RECV_PIN); //creates and names the receiver object
+    decode_results results;   //stores incoming code from 'irrecv'
+
+    void setup() {
+        Serial.begin(9600); //initialises serial monitor and baud rate to 9600
+        Serial.println("program start.");
+        irrecv.enableIRIn(); //begins the receiver to receive incoming signals
+    }
+
+    void loop() {
+    //ensure to press each button, and record the hexadecimal (the code that is 6 letters and numbers long)
+    //they will be needed later to code a certain task to each corresponding button
+
+        if (irrecv.decode(&results)) {        //stores a code if a signal is received
+            Serial.println(results.value, HEX); //prints out the code received in hexadecimal
+            irrecv.resume();                    //allows the receiver to contune to receive incoming signals
+
+
+            switch (results.value) {
+            //depending the results of the incoming signals, a certain task is done
+            //in this case it prints what button was pressed to the serial monitor
+            case 0xFFA25D:
+                Serial.println("CH- button has been pressed");
+                break;
+            case 0xFF629D:
+                Serial.println("CH button has been pressed");
+                break;
+            case 0xFFE21D:
+                Serial.println("CH+ button has been pressed");
+                break;
+            case 0xFF22DD:
+                Serial.println("PREV button has been pressed");
+                break;
+            case 0xFF02FD:
+                Serial.println("NEXT button has been pressed");
+                break;
+            case 0xFFC23D:
+                Serial.println("PAUSE button has been pressed");
+                break;
+            case 0xFFE01F:
+                Serial.println("VOL- button has been pressed");
+                break;
+            case 0xFFA857:
+                Serial.println("VOL+ button has been pressed");
+                break;
+            case 0xFF906F:
+                Serial.println("EQ button has been pressed");
+                break;
+            case 0xFF6897:
+                Serial.println("0 button has been pressed");
+                break;
+            case 0xFF9867:
+                Serial.println("+100 button has been pressed");
+                break;
+            case 0xFFB04F:
+                Serial.println("+200 button has been pressed");
+                break;
+            case 0xFF30CF:
+                Serial.println("1 button has been pressed");
+                break;
+            case 0xFF18E7:
+                Serial.println("2 button has been pressed");
+                break;
+            case 0xFF7A85:
+                Serial.println("3 button has been pressed");
+                break;
+            case 0xFF10EF:
+                Serial.println("4 button has been pressed");
+                break;
+            case 0xFF38C7:
+                Serial.println("5 button has been pressed");
+                break;
+            case 0xFF5AA5:
+                Serial.println("6 button has been pressed");
+                break;
+            case 0xFF42BD:
+                Serial.println("7 button has been pressed");
+                break;
+            case 0xFF4AB5:
+                Serial.println("8 button has been pressed");
+                break;
+            case 0xFF52AD:
+                Serial.println("9 button has been pressed");
+                break;
+            }
+        }
+    }
+</details>
+
+
+#### Sketch 5: IR Remote Interrupt
+
+<details>
+  <summary>Click to see code!</summary>
+  
+    #include <IRremote.h>     //includes the library needed for the IR remote
+    const int RECV_PIN = 2;   //declares the incoming DATA pin
+    IRrecv irrecv (RECV_PIN); //creates and names the receiver object
+    decode_results results;   //stores incoming code from 'irrecv'
+
+
+
+    void setup() {
+        Serial.begin(9600); //initialises serial monitor and baud rate to 9600
+        Serial.println("program start.");
+        irrecv.enableIRIn(); //begins the receiver to receive incoming signals
+
+
+        pinMode(RECV_PIN, INPUT_PULLUP); //declares the pin as an interrupt
+        attachInterrupt(digitalPinToInterrupt(RECV_PIN), eee, CHANGE);
+        //declares the pin number, the method name, and activation state in order for interrupt to run
+        //there are three possible activation states
+        //RISING activates when there is a rise in voltage
+        //FALLING activates when there is a drop in voltage\
+        //CHANGE activates when they is either a rise or drop in voltage
+    }
+
+    void loop() {
+        Serial.println("on standby...");
+        delay(2500);
+    }
+
+
+    void IRTranslate() {
+        //this ensures that the interrupt is working if certain button outputs are printed to the serial monitor
+        //depending on what button is pressed, a certain task is carried out
+
+        if (irrecv.decode(&results)) {          //stores a code if a signal is received
+            Serial.println(results.value, HEX); //prints out the code received in hexadecimal
+            irrecv.resume();                    //allows the receiver to contune to receive incoming signals
+
+            switch (results.value) {
+            //depending the results of the incoming signals, a certain task is done
+            //in this case it prints what button was pressed to the serial monitor
+            case 0xFFA25D:
+                Serial.println("CH- button has been pressed");
+                break;
+            case 0xFF629D:
+                Serial.println("CH button has been pressed");
+                break;
+            case 0xFFE21D:
+                Serial.println("CH+ button has been pressed");
+                break;
+            case 0xFF22DD:
+                Serial.println("PREV button has been pressed");
+                break;
+            case 0xFF02FD:
+                Serial.println("NEXT button has been pressed");
+                break;
+            case 0xFFC23D:
+                Serial.println("PAUSE button has been pressed");
+                break;
+            case 0xFFE01F:
+                Serial.println("VOL- button has been pressed");
+                break;
+            case 0xFFA857:
+                Serial.println("VOL+ button has been pressed");
+                break;
+            case 0xFF906F:
+                Serial.println("EQ button has been pressed");
+                break;
+            case 0xFF6897:
+                Serial.println("0 button has been pressed");
+                break;
+            case 0xFF9867:
+                Serial.println("+100 button has been pressed");
+                break;
+            case 0xFFB04F:
+                Serial.println("+200 button has been pressed");
+                break;
+            case 0xFF30CF:
+                Serial.println("1 button has been pressed");
+                break;
+            case 0xFF18E7:
+                Serial.println("2 button has been pressed");
+                break;
+            case 0xFF7A85:
+                Serial.println("3 button has been pressed");
+                break;
+            case 0xFF10EF:
+                Serial.println("4 button has been pressed");
+                break;
+            case 0xFF38C7:
+                Serial.println("5 button has been pressed");
+                break;
+            case 0xFF5AA5:
+                Serial.println("6 button has been pressed");
+                break;
+            case 0xFF42BD:
+                Serial.println("7 button has been pressed");
+                break;
+            case 0xFF4AB5:
+                Serial.println("8 button has been pressed");
+                break;
+            case 0xFF52AD:
+                Serial.println("9 button has been pressed");
+                break;
+            }
+        }
+    }
+
+</details>
+
+
+#### Sketch 6: Final Version
+
+<details>
+  <summary>Click to see code!</summary>
+
+  *\*Note - this is much neater in the .INO file.*
+
+    /*
+    Amaiam ul Haque
+    Last Updated: Jan 26, 2023
+    Description:********************************************************************************************
+    Let's-a-go! *insert super mario bros theme*
+    */
+
+
+    /* Note:
+    * Since this file has multiple tabs,
+    * each of them run in a specific order.
+    * It will always start off with the tab that the folder is named after,
+    * and then the rest is determined by their alphabetical order.
+    * Which is why each tab starts with a,b,c, so on and so forth,
+    * and if there is a second letter following the first one, 
+    * this is meant to serve as some sort of a subsection. 
+    * 
+    * For example, 
+    * the transitions tabs start with the letter 'f',
+    * while each different type of transition have their own tab/subsection (fa, fb, fc...) 
+    * 
+    * But in this case the only tabs that have to be in order are the declarations, setup, and loop.
+    * Since all the other tabs are methods and will not run until called upon.
+    */
+
+
+    #include <FastLED.h>              //the library for RGB LEDs
+    #define LED_PIN         5         //LED data pin
+    #define CHIP_SET        WS2812B   //type of RGB LED Strip
+    #define COLOUR_CODE     GRB       //the sequence of colours
+    #define LED_NUM         54        //# of LEDs in strip
+    CRGB LEDs[LED_NUM];               //array to hold all LEDs
+
+
+    #include <IRremote.h>     //library for the IR receiver
+    const int RECV_PIN = 2;   //incoming & outgoing signal pin
+    IRrecv irrecv (RECV_PIN); //create and name receiver object
+    decode_results results;   //stores incoming code/results
+
+
+
+    int duration = 1;               //the delay between each colour/transition
+    byte brightness = 255;          //the desired brightness level of the LEDs (0 = off, 1 = dimmest 255 = brightest)
+    boolean currentState = HIGH;    //tracks the current state of power (whether the LEDs are on or off)
+    boolean paused = false;         //tracks whether or not the LEDs are stopped/paused at a chosen colour
+    int transition = 0;             //tracks the current transition to switch between each of them
+    byte crease = 15;               //the (in/de)crease / step for each colour in between the fade transition
+    int currentLED = 0;             //keeps track of current LED in the array for the spiral transition
+    int previousLEDs;               //keeps tracks of previous LEDs to update their brightness
+                                    //currently this is not working how i want it to
+    int previousResult;             //keeps track of the most recent input received from the IR remote
+                                    
+
+
+    void setup() {
+        Serial.begin(9600);
+        Serial.println("Let the show begin!!!"); //program has started
+
+
+        //configuration of the RGB LED strip using the FastLED library
+        FastLED.addLeds<CHIP_SET, LED_PIN, COLOUR_CODE>(LEDs, LED_NUM); //adds LEDs so it is easier to use functions such as setBrightness, clear, and show
+        FastLED.setMaxPowerInVoltsAndMilliamps(5, 3000); //sets max power to ensure safe usage
+        FastLED.setBrightness(brightness); //sets the brightness of LEDs
+        FastLED.clear(); //clears and previous local data
+        FastLED.show(); //updates the local data and displays it
+
+
+        //configuration of the IR remote using the IRremote library
+        irrecv.enableIRIn(); //IR Receiver begins receiving process
+        pinMode(RECV_PIN, INPUT_PULLUP); //declares pin as input meant for an interrupt
+        attachInterrupt(digitalPinToInterrupt(RECV_PIN), IRTranslate, RISING); //declares the pin, method, & activation state to setup the interrupt
+    }
+
+
+    //void loop() { //this is what is supposed to run if the IRTranslate method worked.
+    //  Default();
+    //}
+
+    void loop() {
+        //since the IRTranslate method is not working, code will have to go through them each maually
+        //everything below is just for easy copy paste
+
+
+        //sets brightness and duration to what a value that the IR remote could have done and goes through each transition
+
+        brightness = 75;
+        FastLED.setBrightness(brightness);
+        duration = 10;
+        Default();
+
+        brightness = 175;
+        FastLED.setBrightness(brightness);
+        duration = 5;
+        Default();
+
+        brightness = 255;
+        FastLED.setBrightness(brightness);
+        duration = 1;
+        Default();
+
+
+        Fade(crease); //this one only has duraution of one since it takes really long
+
+        brightness = 75;
+        FastLED.setBrightness(brightness);
+        duration = 10;
+        for (int i = 0; i < 5; i++)
+            Spiral();
+
+        brightness = 175;
+        FastLED.setBrightness(brightness);
+        duration = 5;
+        for (int i = 0; i < 7; i++)
+            Spiral();
+
+        brightness = 255;
+        FastLED.setBrightness(brightness);
+        duration = 1;
+        for (int i = 0; i < 10; i++)
+            Spiral();
+
+
+        brightness = 75;
+        FastLED.setBrightness(brightness);
+        duration = 10;
+        for (int i = 0; i < 5; i++)
+            Reload();
+
+        brightness = 175;
+        FastLED.setBrightness(brightness);
+        duration = 5;
+        for (int i = 0; i < 7; i++)
+            Reload();
+
+        brightness = 255;
+        FastLED.setBrightness(brightness);
+        duration = 1;
+        for (int i = 0; i < 10; i++)
+            Reload();
+
+        brightness = 75;
+        FastLED.setBrightness(brightness);
+        duration = 10;
+        for (int i = 0; i < 100; i++)
+            Random();
+
+        brightness = 175;
+        FastLED.setBrightness(brightness);
+        duration = 5;
+        for (int i = 0; i < 250; i++)
+            Random();
+
+        brightness = 255;
+        FastLED.setBrightness(brightness);
+        duration = 1;
+        for (int i = 0; i < 555; i++)
+            Random();
+
+        brightness = 175;
+        FastLED.setBrightness(brightness);
+        duration = 5;
+        Purples();
+
+        brightness = 255;
+        FastLED.setBrightness(brightness);
+        duration = 1;
+        Purples();
+    }
+
+
+
+    //eee
+    void IRTranslate() {
+        if (irrecv.decode(&results)) {
+            delay(100);
+            irrecv.resume();
+
+            //stores the most recent input to avoid repeats
+            //0xFFFFFFFF is the code received when a repeat is consecutive button pressed
+            if (results.value == 0xFFFFFFFF)
+                results.value = previousResult;
+            else 
+                previousResult = results.value;
+
+
+            Serial.println("Current result = " + (results.value, HEX));
+            Serial.println("Previous result = " + previousResult);
+            switch (results.value) {
+                //---------------------------------------------------------------------------------------
+                case 0xFFA25D: //turns on and off the LEDS
+                    Serial.println("CH- button has been pressed");
+                    Serial.println("CH- = power");
+                    if (currentState == HIGH) { //to turn off
+                        currentState == LOW;
+                        FastLED.setBrightness(0);
+                        while (currentState == LOW)
+                            delay(50);
+                    }
+                    else { //to turn on
+                        currentState == HIGH;
+                        FastLED.setBrightness(brightness);
+                    }
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF22DD: //decreases the speed of transitions
+                    Serial.println("PREV button has been pressed");
+                    Serial.println("PREV = -speed");
+                    if (duration >= 50)
+                    duration -= 50;
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF02FD: //increases the speed of transitions
+                    Serial.println("NEXT button has been pressed");
+                    Serial.println("NEXT = +speed");
+                    if (duration <= 2500)
+                    duration += 50;
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFFC23D: //pauses the code and allows the current colour to only be displayed
+                    Serial.println("PAUSE button has been pressed");
+                    Serial.println("PAUSE/PLAY");
+                    if (paused == false) { //to pause
+                        paused = true;
+                        while (paused == true)
+                            delay (250);
+                    }
+                    else //to play/continue
+                        paused = false;
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFFE01F: //decreases the brightness of LEDs
+                    Serial.println("VOL- button has been pressed");
+                    Serial.println("VOL- = -brightness");
+                    if (brightness >= 15) {
+                        brightness -= 15;
+                        FastLED.setBrightness(brightness);
+                    }
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFFA857: //increases the brightness of LEDs
+                    Serial.println("VOL+ button has been pressed");
+                    Serial.println("VOL+ = +brightness");
+                    if (brightness <= 240) {
+                        brightness += 15;
+                        FastLED.setBrightness(brightness);
+                    }
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF906F: //swaps between all the dfferent transitions
+                    Serial.println("EQ button has been pressed");
+                    Serial.println("EQ = transition");
+                    if (transition == 5)
+                        transition = 0;
+                    else
+                        transition += 1;
+
+
+                    switch (transition) {
+                        case 0:
+                            while (transition == 0)
+                            Default();
+                            break;
+                        case 1:
+                            while (transition == 1)
+                            Fade(crease);
+                            break;
+                        case 2:
+                            while (transition == 2)
+                            Spiral();
+                            break;
+                        case 3:
+                            while (transition == 3)
+                            Reload();
+                            break;
+                        case 4:
+                            while (transition == 4)
+                            Random();
+                            break;
+                        case 5:
+                            while (transition == 5)
+                            Purples();
+                            break;
+                    }
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF38C7: //displays only purple
+                    Serial.println("5 button has been pressed");
+                    Serial.println("5 = purple");
+                    SetAllLEDs(255, 0, 255);
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF42BD: //display icy white
+                    Serial.println("7 button has been pressed");
+                    Serial.println("7 = icy white");
+                    SetAllLEDs(212, 235, 255);
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF4AB5: //display only white
+                    Serial.println("8 button has been pressed");
+                    Serial.println("8 = white");
+                    SetAllLEDs(255, 255, 255);
+                    break;
+                //---------------------------------------------------------------------------------------
+                case 0xFF52AD: //display warm white
+                    Serial.println("9 button has been pressed");
+                    Serial.println("9 = warm white");
+                    SetAllLEDs(255, 244, 229);
+                    break;
+                    //---------------------------------------------------------------------------------------
+                    //      default:
+                    //        //Serial.println("One of the following buttons have been pressed.\n\tCH \n\tCH+ \n\t0 \n\t+100 \n\t+200 \n\t1 \n\t2 \n\t3 \n\t4 \n\t6");
+                    //        //CH=FF629D, CH+=FFE21D, 0=FF6897, +100=FF9867, +200=FFB04F, 1=FF30CF, 2=FF18E7, 3=FF7A85, 4=FF10EF, 6=FF5AA5
+                    //        Serial.println("One of the following buttons have been pressed; CH, CH+, 0, +100, +200, 1, 2, 3, 4, 6");
+                    //        break;
+            }
+        }
+    }
+
+
+
+    void SetAllLEDs (byte r, byte g, byte b) { //sets all LEDS to a single colour using a for loop to go through all of them
+        for (int i = 0; i < LED_NUM; i++)
+            LEDs[i] = CRGB(r, g, b);
+        FastLED.show();
+        delay(duration);
+    }
+
+
+
+    void FadeBrightness(byte r, byte g, byte b) {//steadily increases and then decreases brightness of all LEDs based on the current colour
+        for (byte i = 0; i < brightness; i++) {
+            FastLED.setBrightness(i);
+            SetAllLEDs(r, g, b);
+            FastLED.show();
+            delay(duration);
+        }
+        for (byte i = brightness; i > 0; i--) {
+            FastLED.setBrightness(i);
+            SetAllLEDs(r, g, b);
+            FastLED.show();
+            delay(duration);
+        }
+    }
+
+
+
+    void UpdateCurrentLED() { 
+        //keeps track of which LED currently display / updated with a new colour 
+        //and then resets it back to index zero when it gets to the highest index
+        if (currentLED < (LED_NUM - 1))
+            currentLED++;
+        else
+            currentLED = 0;
+        delay(duration);
+    }
+
+
+
+    void FadePreviousLED(byte r, byte g, byte b) {//a way to keep track of past LEDs with new colours
+
+        for (byte i = 1; i <= 17; i++) {
+            //since their is no setBrightness function for a single LED
+            //reducing the amount of red/green/blue will make it appear to be dimmer
+            r = r * i / 17;
+            g = g * i / 17;
+            b = b * i / 17;
+
+            //keeps tracks of the previous LEDS for upto 17 behind of the currentLED
+            if (i > currentLED)
+            previousLEDs = LED_NUM - i - currentLED;
+            else
+            previousLEDs = currentLED - i;
+        }
+    }
+
+
+    void Default() { //goes through all 16777216 possible colours with a smooth transition without any significant change
+        for (byte i = 0; i < 255; i++)  //red to yellow
+            SetAllLEDs(255, i, 0);
+            
+        for (byte i = 255; i > 0; i--)  //yellow to green
+            SetAllLEDs(i, 255, 0);
+            
+        for (byte i = 0; i < 255; i++)  //green to cyan
+            SetAllLEDs(0, 255, i);
+
+        for (byte i = 255; i > 0; i--)  //cyan to blue
+            SetAllLEDs(0, i, 255);
+
+        for (byte i = 0; i < 255; i++)  //blue to purple
+            SetAllLEDs(i, 0, 255);
+
+        for (byte i = 255; i > 0; i--)  //purple to red
+            SetAllLEDs(255, 0, i);
+    }
+
+
+
+    void Fade(byte crease) {//basically default transition but it slowly becomes brighter and until max desired brightness and then slowly fades until completely dark
+    
+        for (byte i = 0; i < 255; i += crease)  //red to yellow
+            FadeBrightness(255, i, 0);
+            
+        for (byte i = 255; i > 0; i -= crease)  //yellow to green
+            FadeBrightness(i, 255, 0);
+            
+        for (byte i = 0; i < 255; i += crease)  //green to cyan
+            FadeBrightness(0, 255, i);
+
+        for (byte i = 255; i > 0; i -= crease)  //cyan to blue
+            FadeBrightness(0, i, 255);
+
+        for (byte i = 0; i < 255; i += crease)  //blue to purple
+            FadeBrightness(i, 0, 255);
+
+        for (byte i = 255; i > 0; i -= crease)  //purple to red
+            FadeBrightness(255, 0, i);
+    }
+
+
+
+    void Spiral() {
+        //allows for a single LED to be a colour while going all around in a circle not stopping while also steadily changing colours
+
+        for (byte i = 0; i < 255; i += crease) { //red to yellow
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(255, i, 0);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+        for (byte i = 255; i > 0; i -= crease) { //yellow to green
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(i, 255, 0);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 0; i < 255; i += crease) { //green to cyan
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(0, 255, i);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 255; i > 0; i -= crease) { //cyan to blue
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(0, i, 255);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 0; i < 255; i += crease) { //blue to purple
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(i, 0, 255);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 255; i > 0; i -= crease) { //purple to red
+            FastLED.clear();
+            LEDs[currentLED] = CRGB(255, 0, i);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+    }
+
+
+
+    void Reload() {//like spiral transition but it affects all LEDs
+        //as new LEDs are updated with new colours, old LEDs are replaced
+        //all while steadily changing colours
+        for (byte i = 0; i < 255; i += crease) { //red to yellow
+            LEDs[currentLED] = CRGB(255, i, 0);
+            FadePreviousLED(255, i, 0);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+        for (byte i = 255; i > 0; i -= crease) { //yellow to green
+            LEDs[currentLED] = CRGB(i, 255, 0);
+            FadePreviousLED(i, 255, 0);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 0; i < 255; i += crease) { //green to cyan
+            LEDs[currentLED] = CRGB(0, 255, i);
+            FadePreviousLED(0, 255, i);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 255; i > 0; i -= crease) { //cyan to blue
+            LEDs[currentLED] = CRGB(0, i, 255);
+            FadePreviousLED(0, i, 255);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 0; i < 255; i += crease) { //blue to purple
+            LEDs[currentLED] = CRGB(i, 0, 255);
+            FadePreviousLED(i, 0, 255);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+
+        for (byte i = 255; i > 0; i -= crease) { //purple to red
+            LEDs[currentLED] = CRGB(255, 0, i);
+            FadePreviousLED(255, 0, i);
+            FastLED.show();
+            UpdateCurrentLED();
+            delay(duration);
+        }
+    }
+
+
+
+    void Random(){ //basically is just relaod but each LED that is updated with a new colour, is randomised
+        LEDs[currentLED] = CRGB(random(255), random(255), random(255));
+        FastLED.show();
+        UpdateCurrentLED();
+        delay(duration);
+    }
+
+
+
+    void Purples() {//basically just the default transition but it goes through all the possible purples
+        for (byte i = 0; i < 255; i++)  // red to purple
+            SetAllLEDs(255, 0, i);
+
+        for (byte i = 255; i > 0; i--)  //purple to blue
+            SetAllLEDs(i, 0, 255);
+
+        for (byte i = 0; i < 255; i++)  //blue to purple
+            SetAllLEDs(i, 0, 255);
+        
+        for (byte i = 0; i < 255; i++)  //purple to white
+            SetAllLEDs(255, i, 255);
+            
+        //reverse start
+        for (byte i = 255; i > 0; i--)  //white to purple
+            SetAllLEDs(255, i, 255);
+        
+        for (byte i = 255; i > 0; i--)  //purple to blue
+            SetAllLEDs(i, 0, 255);
+        
+        for (byte i = 0; i < 255; i++)  //blue to purple
+            SetAllLEDs(i, 0, 255);
+        
+        for (byte i = 255; i > 0; i--)  //purple to red
+            SetAllLEDs(255, 0, i);
+    }
+  
+</details>
+
+
 
 
 ### Progress Pictures
@@ -1501,103 +1534,43 @@ Final Results:
 
 A **strength** about my infinity mirror would be the smooth transitions between each colour. As each colour progresses, there is a very slight change in colour through the use of loops with an increment of one. These ever so small changes ensure that the transition does not look choppy.
 
-## Evaluation
+Another **strength** would be the user interface. Through the use of an IR receiver and remote control, the user only has to press a designated button in order to switch between the various options. All products are heavily chosen and used for their convenience. If it is a hassle just to switch between options, would it even be used in the first place?
 
-A **strength** about my infinity mirror would be the smooth transitions
-between each colour. As each colour progresses, there is a very slight
-change in colour through the use of loops with an increment of one.
-These ever so small changes ensure that the transition does not look
-choppy.
-
-Another **strength** would be the user interface. Through the use of an
-IR receiver and remote control, the user only has to press a designated
-button in order to switch between the various options. All products are
-heavily chosen and used for their convenience. If it is a hassle just to
-switch between options, would it even be used in the first place?
-
-The first **weakness** would be the IR remote control buttons. Without
-looking at the operating instructions, it might be difficult to remember
-which button is for what. What I would have liked to do was get a few
-circular stickers and design a few icons for each button so each of
-their functions could be identified at first glance.
-
-The second **weakness** would be the inner mirror sometimes coming off.
-However this was only an issue when it was placed the front facing the
-ground. It almost always goes back in place when slowly flipped back to
-the correct orientation. To resolve this, I would used a stronger form
-of adhesive to stick the mirror to the back panel. This time I used
-thick double sided tape with some type of squishy foam texture. Next
-time, I would either find stronger double sided tape or gorilla glue.
-
-A **problem** that I faced was that the wires for the LED strip
-continuously frayed making it almost impossible to place into the
-solderless breadboard. In order to fix this, I simply applied a thin
-layer of solder to each of the frayed wires, ensuring they would
-solidify as one whole wire instead of a bunch of miniscule frayed ones.
-
-Another **problem** that I encountered would be the IR receiver looking
-a bit out of place while it hung from the bottom of the frame. So I
-instead placed it at the top. At first I thought this would have been a
-problem with doing so, since it might have been hard for it to receive
-signals from all the way up there with the limited range. However, after
-receiving the component, I realised that the IR receiver itself can be
-tilted, which can counteract the issue with the range limit of the IR
-receiver.
-
-In terms of any **changes**, if I were to make an infinity mirror again,
-I would like to use a better one-way mirror, in terms of both its
-clarity and reflectivity. This would allow for better practical use when
-it is turned off to function as a normal mirror, since as of now, it is
-just a tad bit blurry. Moreover, with a higher reflectiveness, there
-would be more illusions of the “infinite” LEDs, allowing for a deeper
-effect and appearance of the void of the abyss.
+The first **weakness** would be the IR remote control buttons. Without looking at the operating instructions, it might be difficult to remember which button is for what. What I would have liked to do was get a few circular stickers and design a few icons for each button so each of their functions could be identified at first glance.
 
 The second **weakness** would be the inner mirror sometimes coming off. However this was only an issue when it was placed the front facing the ground. It almost always goes back in place when slowly flipped back to the correct orientation. To resolve this, I would used a stronger formof adhesive to stick the mirror to the back panel. This time I used thick double sided tape with some type of squishy foam texture. Next time, I would either find stronger double sided tape or gorilla glue.
 
+A **problem** that I faced was that the wires for the LED strip continuously frayed making it almost impossible to place into the solderless breadboard. In order to fix this, I simply applied a thin layer of solder to each of the frayed wires, ensuring they would solidify as one whole wire instead of a bunch of miniscule frayed ones.
+
+Another **problem** that I encountered would be the IR receiver looking a bit out of place while it hung from the bottom of the frame. So I instead placed it at the top. At first I thought this would have been a problem with doing so, since it might have been hard for it to receive signals from all the way up there with the limited range. However, after receiving the component, I realised that the IR receiver itself can be tilted, which can counteract the issue with the range limit of the IR receiver.
+
+In terms of any **changes**, if I were to make an infinity mirror again, I would like to use a better one-way mirror, in terms of both its clarity and reflectivity. This would allow for better practical use when it is turned off to function as a normal mirror, since as of now, it is just a tad bit blurry. Moreover, with a higher reflectiveness, there would be more illusions of the “infinite” LEDs, allowing for a deeper effect and appearance of the void of the abyss.
+
+## Skills Learned & Applied
+
+
 ## Bibliography
 
-Finio, Ben. “Arduino-Controlled RGB Led Infinity Mirror.”
-*Instructables*, Autodesk, 17 Sept. 2013,
-[<u>https://www.instructables.com/Arduino-controlled-RGB-LED-Infinity-Mirror/</u>](https://www.instructables.com/Arduino-controlled-RGB-LED-Infinity-Mirror/).
+Finio, Ben. “Arduino-Controlled RGB Led Infinity Mirror.” *Instructables*, Autodesk, 17 Sept. 2013, [<u>https://www.instructables.com/Arduino-controlled-RGB-LED-Infinity-Mirror/</u>](https://www.instructables.com/Arduino-controlled-RGB-LED-Infinity-Mirror/).
 
-A self-directed project by BEn Finio that used an Arduino UNO to program
-an RGB LED strip using a potentiometer to control each the red, green,
-and blue values in order to creat an infinity mirror.
+A self-directed project by BEn Finio that used an Arduino UNO to program an RGB LED strip using a potentiometer to control each the red, green, and blue values in order to creat an infinity mirror.
 
-Pattabiraman, Krishna. “How to Set up an IR Remote and Receiver on an
-Arduino.” *Circuit Basics*, 2 Nov. 2021,
-[<u>https://www.circuitbasics.com/arduino-ir-remote-receiver-tutorial/</u>](https://www.circuitbasics.com/arduino-ir-remote-receiver-tutorial/).
+Pattabiraman, Krishna. “How to Set up an IR Remote and Receiver on an Arduino.” *Circuit Basics*, 2 Nov. 2021, [<u>https://www.circuitbasics.com/arduino-ir-remote-receiver-tutorial/</u>](https://www.circuitbasics.com/arduino-ir-remote-receiver-tutorial/).
 
-A tutorial by Kirshna Pattabiraman on how to wire and set an IR remote
-and receiver for an Arduino and explaining the concepts behind them.
+A tutorial by Kirshna Pattabiraman on how to wire and set an IR remote and receiver for an Arduino and explaining the concepts behind them.
 
-Window Films, Gila. “Gila RTK500 Complete Window Film Application Kit,
-1-Pack.” *Gila RTK500 Complete Window Film Application Kit, 1-Pack*,
-Amazon, 7 Apr. 2018,
-[<u>https://www.amazon.ca/Gila-Window-Films-RTK500-Application/dp/B002YXPITY/ref=sr\_1\_4?crid=1BJ7U1HFA2086&keywords=mirror%2Bfilm%2Bapplication%2Bkit&qid=1670131878&refinements=p\_72%3A11192170011&rnid=11192166011&sprefix=mirror%2Bfilm%2Bapplication%2Bkit%2Caps%2C138&sr=8-4</u>](https://www.amazon.ca/Gila-Window-Films-RTK500-Application/dp/B002YXPITY/ref=sr_1_4?crid=1BJ7U1HFA2086&keywords=mirror%2Bfilm%2Bapplication%2Bkit&qid=1670131878&refinements=p_72%3A11192170011&rnid=11192166011&sprefix=mirror%2Bfilm%2Bapplication%2Bkit%2Caps%2C138&sr=8-4).
+Window Films, Gila. “Gila RTK500 Complete Window Film Application Kit, 1-Pack.” *Gila RTK500 Complete Window Film Application Kit, 1-Pack*, Amazon, 7 Apr. 2018, [<u>https://www.amazon.ca/Gila-Window-Films-RTK500-Application/dp/B002YXPITY/ref=sr\_1\_4?crid=1BJ7U1HFA2086&keywords=mirror%2Bfilm%2Bapplication%2Bkit&qid=1670131878&refinements=p\_72%3A11192170011&rnid=11192166011&sprefix=mirror%2Bfilm%2Bapplication%2Bkit%2Caps%2C138&sr=8-4</u>](https://www.amazon.ca/Gila-Window-Films-RTK500-Application/dp/B002YXPITY/ref=sr_1_4?crid=1BJ7U1HFA2086&keywords=mirror%2Bfilm%2Bapplication%2Bkit&qid=1670131878&refinements=p_72%3A11192170011&rnid=11192166011&sprefix=mirror%2Bfilm%2Bapplication%2Bkit%2Caps%2C138&sr=8-4).
 
-A tutorial that is included as a video and step-by-step instructions in
-the description and pictures of the product’s site.
+A tutorial that is included as a video and step-by-step instructions in the description and pictures of the product’s site.
 
-Workshop, DroneBot. “Using IR Remote Controls with the Arduino.” *Using
-IR Remote Controls with the Arduino*, YouTube, 5 Jan. 2018,
-[<u>https://www.youtube.com/watch?v=8E3ltjnbV0c</u>](https://www.youtube.com/watch?v=8E3ltjnbV0c).
+Workshop, DroneBot. “Using IR Remote Controls with the Arduino.” *Using IR Remote Controls with the Arduino*, YouTube, 5 Jan. 2018,[<u>https://www.youtube.com/watch?v=8E3ltjnbV0c</u>](https://www.youtube.com/watch?v=8E3ltjnbV0c).
 
-A detailed runthrough of how to use IR remote controls with an Arduino
-by the creator of DroneBot Workshop. He goes over the following topics;
-
+A detailed runthrough of how to use IR remote controls with an Arduino by the creator of DroneBot Workshop. He goes over the following topics;
 - An introduction
-
 - How IR remotes work
-
 - How to “see” infrared light
-
 - The IR sensor
-
 - Decoding IR remote codes
-
 - Getting manufacturers codes
-
 - Repurposing an IR remote
-
 - Building a custom IR control
