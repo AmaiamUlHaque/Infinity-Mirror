@@ -44,7 +44,7 @@ this to be a major success.
 
 <u>IR Remote Button Diagram:</u>
 
-<img src=".\attachments\test1/media/image1.jpg"
+<img src=".\media\image1.jpg"
 style="width:2.48825in;height:4.83245in" />
 
 <u>Instructions:</u>
@@ -135,16 +135,16 @@ such as gorilla glue.
 
 Front View: 
 
-<img src=".\attachments\test1/media/image2.jpg" style="width:6.5in;height:7.77778in" />
+<img src=".\media\image2.jpg" style="width:6.5in;height:7.77778in" />
 
 Back View:
 
-<img src=".\attachments\test1/media/image3.jpg" style="width:6.5in;height:6.18056in" />
+<img src=".\media\image3.jpg" style="width:6.5in;height:6.18056in" />
 
 
 Side View:
 
-<img src=".\attachments\test1/media/image4.jpg" style="width:3.63883in;height:6.80564in" />
+<img src=".\media\image4.jpg" style="width:3.63883in;height:6.80564in" />
 
 
 <u>IR Receiver:</u>
@@ -153,7 +153,7 @@ GND, which is an exit for the current to return back to VCC and get
 power again, and then there is OUT. It is the data pin for the
 component, it receives incoming data.
 
-<img src=".\attachments\test1/media/image5.png" style="width:2.125in;height:1.66667in" />
+<img src=".\media\image5.png" style="width:2.125in;height:1.66667in" />
 
 
 <u>RGB LED:</u>
@@ -163,7 +163,7 @@ power there is VCC, which is for the entire circuit. But in this case
 there is VDD, which is the voltage for the chip and VSS is is the
 voltage drainage system, in other words, GND.
 
-<img src=".\attachments\test1/media/image6.png" style="width:2.83333in;height:1.63542in" />
+<img src=".\media\image6.png" style="width:2.83333in;height:1.63542in" />
 
 
 ### Research Findings
@@ -189,24 +189,24 @@ IR Receiver Pinout Diagram:
 
 Original Tinkercad Circuit:
 
-<img src=".\attachments\test1/media/image7.png"
+<img src=".\media\image7.png"
 style="width:6.0397in;height:2.34675in" />
 
 Schematic:
 
-<img src=".\attachments\test1/media/image8.png"
+<img src=".\media\image8.png"
 style="width:4.46354in;height:4.9893in" />
 
 RGB LED Pinout Diagram:
 
 Original Tinkercad Circuit:
 
-<img src=".\attachments\test1/media/image9.png"
+<img src=".\media\image9.png"
 style="width:6.86458in;height:3.46025in" />
 
 Schematic:
 
-<img src=".\attachments\test1/media/image10.png"
+<img src=".\media\image10.png"
 style="width:7.05208in;height:3.64215in" />
 
 ## Construction
@@ -279,17 +279,17 @@ frame)</td>
 
 Front View:
 
-<img src=".\attachments\test1/media/image11.jpg"
+<img src=".\media\image11.jpg"
 style="width:6.5in;height:7.86111in" />
 
 Back View:
 
-<img src=".\attachments\test1/media/image12.jpg"
+<img src=".\media\image12.jpg"
 style="width:6.5in;height:6.09722in" />
 
 Side View:
 
-<img src=".\attachments\test1/media/image13.jpg"
+<img src=".\media\image13.jpg"
 style="width:4.26764in;height:7.55044in" />
 
 In the end, the only difference was that the IR Receiver is now at the
@@ -298,13 +298,13 @@ order to increase the range of the IR receiver.
 
 ### Schematic View
 
-*\*Note: I know it says to use fritzing, but every single site to
+*\*Note: I know I should use fritzing, but every single site to
 download it looked sketchy, so I just wanted to be safe rather than
 sorry.*
 
 <u>Original Tinkercad View:</u>
 
-<img src=".\attachments\test1/media/image14.png"
+<img src=".\media\image14.png"
 style="width:6.95205in;height:3.2497in" />
 
 <u>Schematic View:</u>
@@ -312,7 +312,7 @@ style="width:6.95205in;height:3.2497in" />
 *\*Note: The wires in this view do not let me manually pickup and drag
 them around.*
 
-<img src=".\attachments\test1/media/image15.png"
+<img src=".\media\image15.png"
 style="width:6.94792in;height:3.63994in" />
 
 ### Construction Chart
@@ -1438,45 +1438,37 @@ outputting each colour. Tested out white at max brightness, to test if
 each LED is capable of outputting at max power. Tested out purple since
 it is my favourite colour.
 
-<img src=".\attachments\test1/media/image16.png"
-style="width:2.10302in;height:2.81606in" /><img src=".\attachments\test1/media/image17.png"
-style="width:2.10417in;height:2.81455in" />
 
-<img src=".\attachments\test1/media/image18.png"
-style="width:2.10417in;height:2.79656in" />
+<img src=".\media\image16.png" style="width:2.10302in;height:2.81606in" />
+<img src=".\media\image17.png" style="width:2.10417in;height:2.81455in" />
+<img src=".\media\image18.png" style="width:2.10417in;height:2.79656in" />
 
-<img src=".\attachments\test1/media/image19.png"
-style="width:2.10417in;height:2.80203in" /><img src=".\attachments\test1/media/image20.png"
-style="width:2.10417in;height:2.80556in" /><img src=".\attachments\test1/media/image21.png"
-style="width:2.10417in;height:2.80832in" />
+<img src=".\media\image19.png" style="width:2.10417in;height:2.80203in" />
+<img src=".\media\image20.png" style="width:2.10417in;height:2.80556in" />
+<img src=".\media\image21.png" style="width:2.10417in;height:2.80832in" />
 
 Applying the transparent one way mirror film to glass, then cutting off
 excess film, and finally cleaning the mirror.
 
-<img src=".\attachments\test1/media/image22.png"
-style="width:4.78412in;height:3.57795in" />
+<img src=".\media\image22.png" style="width:4.78412in;height:3.57795in" />
+<img src=".\media\image23.png" style="width:4.77945in;height:4.23234in" />
+<img src=".\media\image24.png" style="width:2.96944in;height:3.97708in" />
+<img src=".\media\image25.png" style="width:3.04514in;height:4in" />
 
-<img src=".\attachments\test1/media/image23.png"
-style="width:4.77945in;height:4.23234in" />
 
-<img src=".\attachments\test1/media/image24.png"
-style="width:2.96944in;height:3.97708in" /><img src=".\attachments\test1/media/image25.png"
-style="width:3.04514in;height:4in" />Temporarily placing the LED strip
+Temporarily placing the LED strip
 along the inner rim of the back panel. In the amidst of doing so, I
 snapped the extra GND wire. Tested the one-way mirror to check for its
 reflectivity and clarity.
 
-<img src=".\attachments\test1/media/image26.png"
-style="width:3.25373in;height:3.27617in" /><img src=".\attachments\test1/media/image27.png"
-style="width:3.05833in;height:3.29678in" />
+<img src=".\media\image26.png" style="width:3.25373in;height:3.27617in" />
+<img src=".\media\image27.png" style="width:3.05833in;height:3.29678in" />
 
-Measuring how much of the LED strip to cut off, then cutting it, and
-finally testing if it still works as it should be.
+Measuring how much of the LED strip to cut off, then cutting it, and finally testing if it still works as it should be.
 
-<img src=".\attachments\test1/media/image28.png"
-style="width:2.83958in;height:4.29167in" /><img src=".\attachments\test1/media/image29.png"
-style="width:3.45703in;height:4.60938in" /><img src=".\attachments\test1/media/image30.png"
-style="width:2.79583in;height:3.82292in" />
+<img src=".\media\image28.png" style="width:2.83958in;height:4.29167in" />
+<img src=".\media\image29.png" style="width:3.45703in;height:4.60938in" />
+<img src=".\media\image30.png" style="width:2.79583in;height:3.82292in" />
 
 Recutting, restriping, and resoldering the LED strip’s VCC, GND, and
 DATA wires, since they were not done as well as I wanted them to be.
@@ -1484,38 +1476,30 @@ Also cutting off the extra VCC and GND wires since they were unnecessary
 in this case. They are used when there are multiple strips to add in
 additional power since they will not be as bright anymore.
 
-<img src=".\attachments\test1/media/image31.png"
-style="width:3.59766in;height:4.79688in" />
+<img src=".\media\image31.png" style="width:3.59766in;height:4.79688in" />
 
 Sticking the LED strip along the inner rim of the back panel with
 gorilla glue. Then, using double sided tape to stick the mirror.
 
-<img src=".\attachments\test1/media/image32.png"
-style="width:3.72396in;height:4.96828in" />
-
-<img src=".\attachments\test1/media/image33.png"
-style="width:3.77422in;height:5.03646in" />
+<img src=".\media\image32.png" style="width:3.72396in;height:4.96828in" />
+<img src=".\media\image33.png" style="width:3.77422in;height:5.03646in" />
 
 Making a hole in the back panel for the LED strip wires to come through,
 and then sealing the hole with tape. Finally, placing velcro for the IR
 remote, power bank, and breadboard.
 
-<img src=".\attachments\test1/media/image34.png"
-style="width:5.09896in;height:3.82422in" />
-
-<img src=".\attachments\test1/media/image35.png"
-style="width:5.11979in;height:3.84997in" />
+<img src=".\media\image34.png" style="width:5.09896in;height:3.82422in" />
+<img src=".\media\image35.png" style="width:5.11979in;height:3.84997in" />
 
 Final Results:
 
-<img src=".\attachments\test1/media/image36.png"
-style="width:3.63542in;height:3.89944in" />
+<img src=".\media\image36.png" style="width:3.63542in;height:3.89944in" />
+<img src=".\media\image37.png" style="width:2.81641in;height:3.75521in" />
+<img src=".\media\image38.png" style="width:3.63021in;height:3.41667in" />
 
-<img src=".\attachments\test1/media/image37.png"
-style="width:2.81641in;height:3.75521in" />
+## Evaluation
 
-<img src=".\attachments\test1/media/image38.png"
-style="width:3.63021in;height:3.41667in" />
+A **strength** about my infinity mirror would be the smooth transitions between each colour. As each colour progresses, there is a very slight change in colour through the use of loops with an increment of one. These ever so small changes ensure that the transition does not look choppy.
 
 ## Evaluation
 
@@ -1568,6 +1552,7 @@ just a tad bit blurry. Moreover, with a higher reflectiveness, there
 would be more illusions of the “infinite” LEDs, allowing for a deeper
 effect and appearance of the void of the abyss.
 
+The second **weakness** would be the inner mirror sometimes coming off. However this was only an issue when it was placed the front facing the ground. It almost always goes back in place when slowly flipped back to the correct orientation. To resolve this, I would used a stronger formof adhesive to stick the mirror to the back panel. This time I used thick double sided tape with some type of squishy foam texture. Next time, I would either find stronger double sided tape or gorilla glue.
 
 ## Bibliography
 
