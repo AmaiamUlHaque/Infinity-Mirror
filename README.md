@@ -6,20 +6,20 @@ A self-built, interactive infinity mirror featuring an individually addressable 
 ## Table of Contents
 
 1. [Summary](#summary)
-2. [Operating Instructions](#operating-instructions)
-3. [Problems & Possibilities](#problems--possibilities)
-4. [Investigation & Ideas](#investigation--ideas) 
+2. [Skills & Technologies](#-skills--technologies)
+3. [Operating Instructions](#operating-instructions)
+4. [Problems & Possibilities](#problems--possibilities)
+5. [Investigation & Ideas](#investigation--ideas) 
     1. [Research Findings](#research-findings)
     2. [Appendix](#appendix)
-5. [Construction](#construction)
+6. [Construction](#construction)
     1. [Parts List](#parts-list)
     2. [Rough Sketches](#rough-sketches)
     3. [Schematic View](#schematic-view)
     4. [Construction Chart](#construction-chart)
     5. [Arduino Programs](#arduino-programs)
     6. [Progress Pictures](#progress-pictures)
-6. [Evaluation](#evaluation)
-7. [Skills Learned & Applied](#skills-learned--applied)
+7. [Evaluation](#evaluation)
 8. [Bibliography](#bibliography)
 
 
@@ -40,6 +40,34 @@ transitions, I have never been so immersed with just lights. When I
 first succeeded in getting the transitions to finally work, I stared at
 them to the point where my eyes began to hurt. Therefore, I would find
 this to be a major success.
+
+
+## Skills & Technologies
+
+### Hardware & Electronics
+- **Circuit Design & Implementation** - Designed and built custom LED circuits
+- **Microcontroller Programming** - Arduino Uno development and programming
+- **Addressable LED Control** - WS2812B (NeoPixel) strip configuration and management
+- **Power Management** - Proper voltage/current regulation for LED arrays
+- **Sensor Integration** - Motion/ultrasonic sensor implementation for interactivity
+- **Hardware Troubleshooting** - Circuit debugging and component testing
+
+### Software & Programming
+- **C++ Programming** - Embedded systems development with the Arduino IDE
+- **Algorithm Development** - Pattern generation and animation sequencing
+- **Real-time Systems** - Creating responsive, sensor-triggered animations
+- **Libraries & APIs** - Utilizing the FastLED library for advanced LED control
+
+### Engineering & Design
+- **3D Modeling** - Custom enclosure and component holder design
+- **Optical Principles** - Application of reflection and infinity mirror effects
+- **Structural Design** - Mechanical assembly and secure component mounting
+
+### Project Management
+- **End-to-End Development** - Taking a project from concept to finished physical product
+- **Problem Solving** - Overcoming integration challenges between hardware and software
+- **Technical Documentation** - Creating clear instructions, schematics, and build guides
+
 
 ## Operating Instructions
 
@@ -1545,9 +1573,6 @@ A **problem** that I faced was that the wires for the LED strip continuously fra
 Another **problem** that I encountered would be the IR receiver looking a bit out of place while it hung from the bottom of the frame. So I instead placed it at the top. At first I thought this would have been a problem with doing so, since it might have been hard for it to receive signals from all the way up there with the limited range. However, after receiving the component, I realised that the IR receiver itself can be tilted, which can counteract the issue with the range limit of the IR receiver.
 
 In terms of any **changes**, if I were to make an infinity mirror again, I would like to use a better one-way mirror, in terms of both its clarity and reflectivity. This would allow for better practical use when it is turned off to function as a normal mirror, since as of now, it is just a tad bit blurry. Moreover, with a higher reflectiveness, there would be more illusions of the “infinite” LEDs, allowing for a deeper effect and appearance of the void of the abyss.
-
-## Skills Learned & Applied
-
 
 ## Bibliography
 
