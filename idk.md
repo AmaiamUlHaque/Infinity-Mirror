@@ -2,7 +2,7 @@
 
 A self-built, interactive infinity mirror featuring an individually addressable RGB LED strip controlled by an Arduino Nano and an IR remote. This project serves as both a functional mirror and a dynamic decorative piece with smooth color transitions and customizable settings.
 
-![Infinity Mirror](https://github.com/user/attachments/if-you-have-a-picture-put-link-here)
+![Infinity Mirror](...)
 
 ## Table of Contents
 

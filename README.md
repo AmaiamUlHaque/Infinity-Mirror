@@ -2,6 +2,27 @@
 
 A self-built, interactive infinity mirror featuring an individually addressable RGB LED strip controlled by an Arduino Nano and an IR remote. This project serves as both a functional mirror and a dynamic decorative piece with smooth color transitions and customizable settings.
 
+## Transitions
+
+> [!WARNING]
+> 
+> The transitions in the collapsible section below contain gifs with FLASHING LIGHTS, which may not be suitable to those with epilepsy or photosensitivity.
+
+
+<details>
+  <summary>Click to see transitions! </summary>
+  
+  
+  *NOTE: The fade transition was originally 5:29 mins, but have been split into three gifs with a total duration of 45s, as to fit into the 15s  gif time limit. Hence, the transition looking very choppy, instead of going slow  and steady. 
+  
+  | Default | Fade | Spiral | Reload | Random | Purples |
+  | --- | --- | --- | --- | --- | --- |
+  | ![default  1](./media/transitions/default%20clip%201.gif) | ![fade 1](./media/transitions/fade%20clip%201.gif) | ![spiral 1](./media/transitions/spiral%20clip%201.gif) | ![reload 1](./media/transitions/reload%20clip%201.gif) | ![random 1](./media/transitions/random%20clip%201.gif) | ![purples](./media/transitions/purples%20clip.gif) |
+  | ![default  2](./media/transitions/default%20clip%202.gif) | ![fade 2](./media/transitions/fade%20clip%202.gif) | ![spiral 2](./media/transitions/spiral%20clip%202.gif) | ![reload 2](./media/transitions/reload%20clip%202.gif) | ![random 2](./media/transitions/random%20clip%202.gif) |                                                    |
+  | ![default  3](./media/transitions/default%20clip%203.gif) | ![fade 3](./media/transitions/fade%20clip%203.gif) | ![spiral 3](./media/transitions/spiral%20clip%203.gif) | ![reload 3](./media/transitions/reload%20clip%203.gif) | ![random 3](./media/transitions/random%20clip%203.gif) |                                                    |
+  
+
+</details>
 
 ## Table of Contents
 
@@ -25,21 +46,7 @@ A self-built, interactive infinity mirror featuring an individually addressable 
 
 ## Summary 
 
-The infinity mirror is mainly for decorative purposes, however it serves
-as a regular mirror while powered off. However, the entire story changes
-when it is turned on. The smooth vivid transition that greets the user
-as soon as they turn it on, along with the various settings that allow
-the user to change it to their liking. It is designed purely to suit
-user preferences and convenience. Well the user in this case is me,
-since this is made and tweaked to my liking. As a result, the final
-product is a success if I am satisfied with it. When I first started
-looking into this, initially it seemed much more difficult and I did not
-think that the colour transitions would be *that* eye-catching. But
-after finally starting the project and getting into the colour
-transitions, I have never been so immersed with just lights. When I
-first succeeded in getting the transitions to finally work, I stared at
-them to the point where my eyes began to hurt. Therefore, I would find
-this to be a major success.
+The infinity mirror is mainly for decorative purposes, however it serves as a regular mirror while powered off. However, the entire story changes when it is turned on. The smooth vivid transition that greets the user as soon as they turn it on, along with the various settings that allow the user to change it to their liking. It is designed purely to suit user preferences and convenience. Well the user in this case is me, since this is made and tweaked to my liking. As a result, the final product is a success if I am satisfied with it. When I first started looking into this, initially it seemed much more difficult and I did not think that the colour transitions would be *that* eye-catching. But after finally starting the project and getting into the colour transitions, I have never been so immersed with just lights. When I first succeeded in getting the transitions to finally work, I stared at them to the point where my eyes began to hurt. Therefore, I would find this to be a major success.
 
 
 ## Skills & Technologies
@@ -122,43 +129,17 @@ each for.*
 
 <u>Core Components:</u>
 
-The IR remote and receiver uses interrupts in order to allow for the
-user’s input to instantly start without waiting for the current section
-of code to finish. It also allows for the most convenient user interface
-that adjusts to their liking.
+The IR remote and receiver uses interrupts in order to allow for the user’s input to instantly start without waiting for the current section of code to finish. It also allows for the most convenient user interface that adjusts to their liking.
 
-The individually addressable RGB LED strip allows for each and every
-single LED to be programmed separately instead of only being able to
-change the entire strip to a single colour. The desired user input to be
-outputted to showcase whatever the user wants to see. It is solely for
-visual purposes.
+The individually addressable RGB LED strip allows for each and every single LED to be programmed separately instead of only being able to change the entire strip to a single colour. The desired user input to be outputted to showcase whatever the user wants to see. It is solely for visual purposes.
 
 ## Problems & Possibilities
 
 There were only a few, yet crucial limitations to this project.
 
-One of the major limitations would be time constraints. If I had more
-time, I would have liked to program a few more features. I had
-originally planned to add in a setting that would allow users to set
-their own colour transition range. For example they would be able to
-choose a starting and ending colour and the LEDs would only display that
-range of colours in whatever transition they would have liked, just as I
-have my own custom transitions of purples, since it is my favourite
-colour. Another feature would be adding in a default startup. With this
-users would be able to set up their favourite transitions along with the
-colours that they like, without having to go through the hassle of
-setting it up every single time they turn on the LEDs. The last feature
-that I wanted to add would be an additional colour transition. It would
-resemble a reloading symbol, starting off at max brightness while
-leaving a fading trail following it.
+One of the major limitations would be time constraints. If I had more time, I would have liked to program a few more features. I had originally planned to add in a setting that would allow users to set their own colour transition range. For example they would be able to choose a starting and ending colour and the LEDs would only display that range of colours in whatever transition they would have liked, just as I have my own custom transitions of purples, since it is my favourite colour. Another feature would be adding in a default startup. With this users would be able to set up their favourite transitions along with the colours that they like, without having to go through the hassle of setting it up every single time they turn on the LEDs. The last feature that I wanted to add would be an additional colour transition. It would resemble a reloading symbol, starting off at max brightness while leaving a fading trail following it.
 
-Another limitation would be the resources department. When it came to
-the time where I had to stick the ordinary mirror to the back panel, if
-it had been left upside down for a prolonged period of time, it would
-slowly come off. Fortunately, it did not break, but it takes quite a bit
-of effort just trying to centre the mirror without opening it up again.
-I used double sided tape, I would use a stronger adhesive next time,
-such as gorilla glue.
+Another limitation would be the resources department. When it came to the time where I had to stick the ordinary mirror to the back panel, if it had been left upside down for a prolonged period of time, it would slowly come off. Fortunately, it did not break, but it takes quite a bit of effort just trying to centre the mirror without opening it up again. I used double sided tape, I would use a stronger adhesive next time, such as gorilla glue.
 
 ## Investigation & Ideas
 
@@ -177,40 +158,20 @@ Side View:
 
 
 <u>IR Receiver:</u>
-There is a pin for each VCC, which provides voltage to the component,
-GND, which is an exit for the current to return back to VCC and get
-power again, and then there is OUT. It is the data pin for the
-component, it receives incoming data.
+There is a pin for each VCC, which provides voltage to the component, GND, which is an exit for the current to return back to VCC and get power again, and then there is OUT. It is the data pin for the component, it receives incoming data.
 
 <img src=".\media\image5.png" style="width:2.125in;height:1.66667in" />
 
 
 <u>RGB LED:</u>
-The pin for DIN (DATA IN) is responsible for all incoming data, while
-DOUT (DATA OUT) is responsible for all outgoing data. Usually to provide
-power there is VCC, which is for the entire circuit. But in this case
-there is VDD, which is the voltage for the chip and VSS is is the
-voltage drainage system, in other words, GND.
+The pin for DIN (DATA IN) is responsible for all incoming data, while DOUT (DATA OUT) is responsible for all outgoing data. Usually to provide power there is VCC, which is for the entire circuit. But in this case there is VDD, which is the voltage for the chip and VSS is is the voltage drainage system, in other words, GND.
 
 <img src=".\media\image6.png" style="width:2.83333in;height:1.63542in" />
 
 
 ### Research Findings
 
-Through my journey through the internet, I have learned various concepts
-that are crucial for this project. The two main components work in ways
-that I have never seen before. The RGB LED strip uses a byte each to
-represent red, green, and blue. Since these are all the primary colours
-of light, with just these three, you can make all the colours of light,
-to be more specific 16’777’216 different colours. The website gave me an
-insight on the basic commands and uses of the FastLED library by Daniel
-Garcia. The second major component would be the IR receiver. It uses
-incoming infrared light signals from the remote to take in decoded
-information. The video I watched taught me about the basics of how to
-use the IR remote library by Ken Shiriff and how to decode my remote
-codes in order to customise it for my own use. Both of these tutorials
-gave me a gist of how everything worked and provided me with enough
-information that I code on my own from scratch.
+Through my journey through the internet, I have learned various concepts that are crucial for this project. The two main components work in ways that I have never seen before. The RGB LED strip uses a byte each to represent red, green, and blue. Since these are all the primary colours of light, with just these three, you can make all the colours of light, to be more specific 16’777’216 different colours. The website gave me an insight on the basic commands and uses of the FastLED library by Daniel Garcia. The second major component would be the IR receiver. It uses incoming infrared light signals from the remote to take in decoded information. The video I watched taught me about the basics of how to use the IR remote library by Ken Shiriff and how to decode my remote codes in order to customise it for my own use. Both of these tutorials gave me a gist of how everything worked and provided me with enough information that I code on my own from scratch.
 
 ### Appendix
 
